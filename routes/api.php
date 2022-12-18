@@ -15,18 +15,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// public route 
+// public route
 Route::post('/v1/register', [AuthController::class, 'register']);
 Route::post('/v1/login', [AuthController::class, 'login']);
+
+Route::put('/v1/update/{id}', [AuthController::class, 'update']);
+// Route::post('/v1/change-password/{id}', [AuthController::class, 'change_password']);
+
 Route::get('/v1/user', [AuthController::class, 'userList']);
 Route::get('/v1/user/{id}', [AuthController::class, 'showUser']);
 Route::get('/v1/logout', [AuthController::class, 'logout']);
 
-// Route::group(['middleware' => ['auth:sanctum']], function () { 
-//     // Route::get('/v1/user', [AuthController::class, 'userList']);
-//     // Route::get('/v1/user/{id}', [AuthController::class, 'showUser']);
-//     Route::get('/v1/logout', [AuthController::class, 'logout']);
-// });
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    // Route::get('/v1/user', [AuthController::class, 'userList']);
+    // Route::get('/v1/user/{id}', [AuthController::class, 'showUser']);
+    // Route::put('/v1/update', [AuthController::class, 'login']);
+    Route::post('/v1/change-password', [AuthController::class, 'change_password']);
+    Route::get('/v1/logout', [AuthController::class, 'logout']);
+});
 
 
 
